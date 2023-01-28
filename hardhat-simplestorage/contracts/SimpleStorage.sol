@@ -16,7 +16,6 @@ contract SimpleStorage {
 
     function store(uint256 _favoriteNumber) public virtual {
         favoriteNumber = _favoriteNumber;
-        retrieve();
     }
 
     function retrieve() public view returns (uint256) {
@@ -24,8 +23,7 @@ contract SimpleStorage {
     }
 
     function addPerson(string calldata _name, uint256 _favoriteNumber) public {
-        People memory newPerson = People(_favoriteNumber, _name);
-        people.push(newPerson);
+        people.push(People(_favoriteNumber, _name));
         nameToFavoriteNumber[_name] = _favoriteNumber;
     }
 }
