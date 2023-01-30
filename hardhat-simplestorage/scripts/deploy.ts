@@ -10,14 +10,14 @@ async function main() {
     await simpleStorage.deployed()
     console.log(`deployed at ${simpleStorage.address}`)
 
-    // if (network.config.chainId == 5) {
-    //     console.log("verifying on etherscan")
-    //     await simpleStorage.deployTransaction.wait(6)
-    //     await verify(simpleStorage.address, [])
-    //     console.log("verified")
-    // } else {
-    //     console.log("skipping verification")
-    // }
+    if (network.config.chainId == 5) {
+        console.log("verifying on etherscan")
+        await simpleStorage.deployTransaction.wait(6)
+        await verify(simpleStorage.address, [])
+        console.log("verified")
+    } else {
+        console.log("skipping verification")
+    }
 
     const currentValue = await simpleStorage.retrieve()
     console.log(`current value: ${currentValue}`)
@@ -27,7 +27,6 @@ async function main() {
     const updatedValue = await simpleStorage.retrieve()
     console.log(`updated value: ${updatedValue}`)
 }
-
 
 async function verify(contactAddress: string, args: any[]) {
     try {
