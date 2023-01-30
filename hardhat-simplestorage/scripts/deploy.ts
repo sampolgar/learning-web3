@@ -1,5 +1,5 @@
 //imports
-const { ethers, run, network } = require("hardhat")
+import { ethers, run, network } from "hardhat"
 
 //async main
 async function main() {
@@ -9,14 +9,15 @@ async function main() {
     const simpleStorage = await SimpleStorageFactory.deploy()
     await simpleStorage.deployed()
     console.log(`deployed at ${simpleStorage.address}`)
-    if (network.config.chainId == 5) {
-        console.log("verifying on etherscan")
-        await simpleStorage.deployTransaction.wait(6)
-        await verify(simpleStorage.address, [])
-        console.log("verified")
-    } else {
-        console.log("skipping verification")
-    }
+
+    // if (network.config.chainId == 5) {
+    //     console.log("verifying on etherscan")
+    //     await simpleStorage.deployTransaction.wait(6)
+    //     await verify(simpleStorage.address, [])
+    //     console.log("verified")
+    // } else {
+    //     console.log("skipping verification")
+    // }
 
     const currentValue = await simpleStorage.retrieve()
     console.log(`current value: ${currentValue}`)
@@ -27,15 +28,16 @@ async function main() {
     console.log(`updated value: ${updatedValue}`)
 }
 
-async function verify(contactAddress, args) {
+
+async function verify(contactAddress: string, args: any[]) {
     try {
         await run("verify:verify", {
             address: contactAddress,
             constructorArguments: args,
         })
-    } catch (e) {
+    } catch (e: any) {
         if (e.message.includes("Contract source code already verified")) {
-            console.llog("Contract source code already verified")
+            console.log("Contract source code already verified")
         } else {
             console.log(e)
         }
