@@ -6,8 +6,11 @@ async function main() {
     const SimpleStorageFactory = await ethers.getContractFactory(
         "SimpleStorage"
     )
+
     const simpleStorage = await SimpleStorageFactory.deploy()
+    
     await simpleStorage.deployed()
+    
     console.log(`deployed at ${simpleStorage.address}`)
 
     if (network.config.chainId == 5) {
