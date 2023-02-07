@@ -23,7 +23,7 @@ contract FundMe {
     mapping(address => uint256) public addressToAmountFunded;
 
     // address public owner;  changes into ==>
-    address public immutable i_owner;
+    address public immutable i_owner;`
 
     constructor() {
         i_owner = msg.sender;
